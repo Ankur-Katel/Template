@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>GLEAM · Salon & Style</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:opsz@14..32&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css//index.css">
+    <link rel="stylesheet" href="css//footer.css">
+</head>
+<body class="antialiased" id="app-body">
+
+  <div id="topNotification" class="glass-card"></div>
+  <div id="serviceDetailPopup" class="popup-overlay"><div class="popup-card" id="detailPopupContent"></div></div>
+  <div id="offerSuccessPopup" class="popup-overlay"><div class="popup-card" id="offerPopupContent"></div></div>
+
+  <div class="flip-container" id="flipContainer">
+    <div class="main-circle" id="mainFab"><i class="fas fa-bolt"></i></div>
+    <div class="flip-buttons">
+      <a href="#book" class="fab"><i class="fas fa-calendar-alt"></i></a>
+      <a class='fab' style="text-decoration:none;" href='next//chat.html'><i class="fas fa-comments"></i></a>
+      <a href="https://wa.me/919876543210?text=Hello! I need help with GLEAM services." class="fab" style="text-decoration:none;"><i class="fas fa-comment"></i></a>
+      <a href="#book" class="fab"><i class="fas fa-calendar-alt"></i></a>
+    </div>
+    <div class="close-mark" id="closeMark">✕</div>
+  </div>
+
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800 px-4 md:px-8 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=80&h=80&fit=crop&auto=format" class="w-10 h-10 rounded-full object-cover border-2 border-amber-600" alt="logo">
+      <span class="text-4xl font-black heading text-amber-800 dark:text-amber-300 tracking-tight">GLEAM</span>
+    </div>
+    <div class="hidden md:flex gap-6 font-medium items-center">
+      <a href="#home">Home</a> <a href="#services">Services</a> <a href="#gallery">Gallery</a> <a href="#offers">Offers</a> <a href="#book">Book</a> <a href="#contact">Contact</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <label class="theme-switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider-toggle"></span>
+      </label>
+      <a href="#book" class="border-call-btn hidden md:inline-block"><i class="fas fa-calendar-alt mr-2"></i>Book Appointment</a>
+    </div>
+  </nav>
+
+  <section id="home" class="min-h-[70vh] bg-cover bg-center bg-fixed flex items-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600');">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 w-full">
+      <div class="max-w-2xl text-white" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight animate-pulse">Premium salon <span class="text-amber-300">in Guwahati</span></h1>
+        <p class="text-2xl mt-4">Hair, skin, grooming — 5,000+ happy clients.</p>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="#book" class="border-call-btn text-white border-white hover:bg-white hover:text-amber-600 text-xl px-8 py-4"><i class="fas fa-calendar-alt mr-2"></i>Get Appointment</a>
+          <a class='bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg' href='next//chat.html' target='_blank'><i class="fas fa-comments mr-2"></i>Inquire</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 md:px-6 pb-28 md:pb-10">
+    <section class="py-8">
+      <div class="stat-card p-6 rounded-3xl">
+        <div class="flex flex-wrap gap-8 justify-around">
+          <div><span class="text-4xl font-black text-amber-600"><span id="counterCustomers">0</span>+</span><br>clients</div>
+          <div><span class="text-4xl font-black text-amber-600"><span id="counterProjects">0</span>+</span><br>styles</div>
+          <div><span class="text-4xl font-black text-amber-600"><span id="counterReviews">0</span>+</span><br>reviews</div>
+          <div><span class="text-4xl font-black text-amber-600"><span id="counterVisitors">0</span>k</span><br>visitors</div>
+        </div>
+        <div class="mt-8 flex flex-col items-center">
+          <p class="text-lg font-semibold mb-2">😊 Customer satisfaction</p>
+          <div class="donut-ring relative w-40 h-40">
+            <svg width="160" height="160" viewBox="0 0 100 100" style="transform: rotate(-90deg);">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="var(--border-light)" stroke-width="8"/>
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#f97316" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="57"/>
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#3b82f6" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="170"/>
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#a855f7" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="226"/>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center"><div class="text-center"><span class="text-3xl font-bold text-amber-600">97%+</span><span class="text-sm block">happy</span></div></div>
+          </div>
+          <div class="flex gap-4 mt-3 text-sm"><span><span class="inline-block w-3 h-3 bg-amber-600 rounded-full"></span> Excellent - 80%</span><span><span class="inline-block w-3 h-3 bg-blue-500 rounded-full"></span> Good - 12%</span><span><span class="inline-block w-3 h-3 bg-purple-500 rounded-full"></span> Okay - 8%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="dynamic-iframe-container" style="width: 100%; margin: 2rem 0;">
+      <iframe id="dynamicIframe" src="NEXT/iframe - Why Us.html" style="width: 100%; height: auto; border: none; background: transparent; display: block;" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+
+    <div class="section-title-wrapper"><h2 class="section-title">Our Services</h2><div class="hand-drawn-line"><svg viewBox="0 0 300 6"><path d="M10,3 Q80,1 150,3 T290,3" stroke="#f97316" stroke-width="2" fill="none"/></svg></div></div>
+    <section id="services" class="py-4"><div class="snap-carousel" id="serviceSwiper"></div>
+      <br><a class='view-all-summary bg-gray-600 text-white px-4 py-2 rounded-full text-sm flex justify-center' href='next//service.html'><i class="fas fa-bolt mr-2"></i>View All Services</a>
+    </section>
+
+    <div class="dynamic-iframe-container" style="width: 100%; margin: 2rem 0;">
+      <iframe id="dynamicIframe" src="NEXT/iframe - Transform.html" style="width: 100%; height: auto; border: none; background: transparent; display: block;" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+    <div class="dynamic-iframe-container" style="width: 100%; margin: 2rem 0;">
+      <iframe id="dynamicIframe" src="NEXT/iframe - Experts.html" style="width: 100%; height: auto; border: none; background: transparent; display: block;" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+    <div class="section-title-wrapper"><h2 class="section-title">Salon Gallery</h2><div class="hand-drawn-line"><svg viewBox="0 0 300 6"><path d="M10,3 Q80,1 150,3 T290,3" stroke="#f97316" stroke-width="2" fill="none"/></svg></div></div>
+    <section id="gallery" class="py-4"><div class="gallery-swiper" id="gallerySwiper"></div></section>
+
+    <div class="dynamic-iframe-container" style="width: 100%; margin: 2rem 0;">
+      <iframe id="dynamicIframe" src="NEXT/iframe - Review.html" style="width: 100%; height: auto; border: none; background: transparent; display: block;" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+
+    <div class="section-title-wrapper"><h2 class="section-title">Special Offers</h2><div class="hand-drawn-line"><svg viewBox="0 0 300 6"><path d="M10,3 Q80,1 150,3 T290,3" stroke="#f97316" stroke-width="2" fill="none"/></svg></div></div>
+    <section id="offers" class="py-4"><div class="snap-carousel" id="offerSwiper"></div></section>
+
+    <div class="dynamic-iframe-container" style="width: 100%; margin: 2rem 0;">
+      <iframe id="dynamicIframe" src="NEXT/iframe - FAQ.html" style="width: 100%; height: auto; border: none; background: transparent; display: block;" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+    
+    <div class="section-title-wrapper"><h2 class="section-title">Book Appointment</h2><div class="hand-drawn-line"><svg viewBox="0 0 300 6"><path d="M10,3 Q80,1 150,3 T290,3" stroke="#f97316" stroke-width="2" fill="none"/></svg></div></div>
+    <section id="book" class="py-4 scroll-mt-20">
+      <div id="welcomeMessage" class="mb-3 text-amber-600 text-lg text-center"></div>
+      <div class="price-detail-box mb-6">
+        <div class="flex justify-between items-center flex-wrap gap-2">
+          <span class="font-semibold">Selected: </span><span id="selectedServicesSummary">None</span>
+          <button id="viewSummaryBtn" class="bg-amber-600 text-white px-4 py-1 rounded-full text-sm"><i class="fas fa-eye"></i> view all</button>
+        </div>
+        <div class="mt-3 flex flex-wrap items-center gap-3"><span class="text-2xl font-black" id="priceDisplay"></span><span id="couponStatus" class="text-sm text-green-600"></span></div>
+        <div id="strikethroughInfo" class="text-sm text-gray-500 dark:text-gray-400"></div>
+      </div>
+      <div id="summaryPopup" class="popup-overlay"><div class="popup-card p-6"><div class="flex justify-between mb-4"><h3 class="text-2xl font-bold">Your selection</h3><button id="closeSummaryPopup" class="text-3xl">✕</button></div><div id="summaryChosen" class="my-4 space-y-2 border-b pb-3"></div><div id="summaryAvailable" class="my-2 space-y-2"></div>
+        <br><a class='view-all-summary bg-gray-600 text-white px-4 py-2 rounded-full text-sm flex justify-center' href='next//service.html'><i class="fas fa-bolt mr-2"></i>View All Services</a>
+      </div></div>
+     
+      <div class="glass-card p-6 md:p-8 rounded-3xl">
+        <form id="bookingForm">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div><label>Full name</label><input type="text" name="Name" id="bookName" required class="w-full p-3 rounded-xl"></div>
+            <div><label>Phone</label><div class="phone-field"><span class="phone-prefix">+91</span><input type="tel" name="Phone" id="bookPhone" placeholder="9876543210" required pattern="[0-9]{10}" maxlength="10"></div></div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mt-4">
+            <div><label>Date</label><input type="date" name="Date" id="bookDate" class="w-full p-3 rounded-xl" min="" required></div>
+            <div><label>Time</label><input type="time" name="Time" id="bookTime" class="w-full p-3 rounded-xl" min="06:00" max="22:00" required></div>
+          </div>
+          <div class="mt-4"><label>Message</label><textarea name="Message" id="bookMsg" rows="2" class="w-full p-3 rounded-xl"></textarea></div>
+          <div class="mt-5">
+            <input type="text" id="couponInput" placeholder="Coupon code" class="w-full p-3 rounded-xl">
+            <button type="button" id="applyCouponBtn" class="mt-2 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-semibold"><i class="fas fa-tag mr-2"></i>Apply coupon</button>
+            <span id="couponMessage" class="text-sm text-green-600 block mt-1"></span>
+          </div>
+          <div class="flex justify-end mt-8">
+            <button type="submit" id="submitBookingBtn" class="bg-amber-600 hover:bg-amber-700 text-white px-10 py-3 rounded-full text-xl font-bold shadow-lg"><i class="fas fa-check-circle mr-2"></i>Confirm booking</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="py-12">
+      <div class="glass-card p-2 rounded-3xl overflow-hidden"><iframe src="maplink" width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+      <footer class="mt-8 grid md:grid-cols-3 gap-4 text-center"><div><span class="font-bold">GLEAM Salon</span><br>Christian Basti, Guwahati</div><div>📞 <a href="tel:+919876543210">+91 98765 43210</a><br>🕒 10am – 8pm daily</div><div><a href="https://maps.google.com/?q=Christian+Basti+Guwahati" target="_blank"><i class="fas fa-map-marker-alt mr-1"></i> Directions</a></div></footer>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div><div class="flex items-center gap-2 mb-4"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03" class="w-10 h-10 rounded-full object-cover border-2 border-amber-600"><span class="text-2xl font-black heading text-amber-800 dark:text-amber-300">GLEAM</span></div><p class="text-gray-600 dark:text-gray-400 text-sm">Premium salon experience in the heart of Guwahati.</p></div>
+        <div><h4 class="font-bold mb-3 text-gray-800 dark:text-white">Quick Links</h4><ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+          <li><a class='hover:text-amber-600 transition' href='next/review.html'>Review</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/service.html'>All Services</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/chat.html'>Chat Bot</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/aboutus.html'>About Us</a></li>
+          <li><a href="next/t&c.html#" class="hover:text-amber-600 transition">T&C*</a></li>
+          <li><a href="next/t&c.html#" class="hover:text-amber-600 transition">Contect Us</a></li>
+          <li><a href="next/t&c.html#" class="hover:text-amber-600 transition">Privat policy</a></li>
+          <li><a class='hover:text-amber-600 transition' href='#book'>Book Appointment</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/accademy.html'>Accademy</a></li>
+        </ul></div>
+        <div><h4 class="font-bold mb-3 text-gray-800 dark:text-white">Contact</h4><ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400"><li><i class="fas fa-phone mr-2 text-amber-600"></i> +91 98765 43210</li><li><i class="fab fa-whatsapp mr-2 text-green-500"></i> +91 98765 43210</li><li><i class="fas fa-map-marker-alt mr-2 text-amber-600"></i> Christian Basti, Guwahati</li></ul></div>
+      </div>
+      <div class="border-t border-gray-200 dark:border-gray-700 pt-6 text-center text-sm text-gray-500 dark:text-gray-400">© <script>document.write(new Date().getFullYear())</script> 
+<span id="salonName">GLEAM</span>. All rights reserved. | 
+Website by <a href="https://wa.me/917896011657?text=Hi%20Ankur%2C%20I%20Want%20a%20Full%20website%20like%20this%20demo" target="_blank" style="text-decoration:none; color:inherit;">Ankur</a></div>
+    </div>
+  </footer>
+
+</body>
+
+<script>
+    // ========== GOOGLE SHEETS WEB APP URL ==========
+    const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyD-r-z2DM9-t3nDVpN8dIsFme24mx6uu1UqQtY8qOCcfTAj7971fre0fAlifWKBAUcKg/exec";
+    
+    // ========== THEME TOGGLE ==========
+    const themeToggle = document.getElementById('themeToggle');
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      if (themeToggle) themeToggle.checked = true;
+    } else {
+      document.body.classList.remove('dark');
+      if (themeToggle) themeToggle.checked = false;
+    }
+    if (themeToggle) {
+      themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+          document.body.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.body.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+        sendThemeToAllIframes();
+      });
+    }
+    
+    // ========== MULTI-IFRAME SOLUTION ==========
+    function sendThemeToAllIframes() {
+      const iframes = document.querySelectorAll('iframe');
+      const isDark = document.body.classList.contains('dark');
+      iframes.forEach(iframe => {
+        if (iframe.contentWindow) {
+          iframe.contentWindow.postMessage({ type: 'themeChange', theme: isDark ? 'dark' : 'light', timestamp: Date.now() }, '*');
+        }
+      });
+    }
+    function adjustAllIframeHeights() {
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        if (iframe.contentWindow) {
+          try {
+            const iframeDoc = iframe.contentWindow.document;
+            const height = Math.max(iframeDoc.body.scrollHeight, iframeDoc.documentElement.scrollHeight, iframeDoc.body.offsetHeight, iframeDoc.documentElement.offsetHeight);
+            if (height > 0) iframe.style.height = height + 'px';
+          } catch (e) {
+            iframe.contentWindow.postMessage({ type: 'requestHeight' }, '*');
+          }
+        }
+      });
+    }
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'iframeHeight') {
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => { if (iframe.contentWindow === event.source) iframe.style.height = event.data.height + 'px'; });
+      }
+      if (event.data && event.data.type === 'iframeReady') { sendThemeToAllIframes(); setTimeout(adjustAllIframeHeights, 100); }
+      if (event.data && event.data.type === 'requestTheme') { sendThemeToAllIframes(); }
+    });
+    function initIframes() {
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach(iframe => { iframe.addEventListener('load', function () { setTimeout(() => { sendThemeToAllIframes(); adjustAllIframeHeights(); }, 500); }); });
+    }
+    let resizeTimer;
+    window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { adjustAllIframeHeights(); }, 250); });
+    window.addEventListener('load', function () { initIframes(); setTimeout(adjustAllIframeHeights, 1000); });
+    setInterval(() => { sendThemeToAllIframes(); adjustAllIframeHeights(); }, 10000);
+
+    // ========== FLIP BUTTON FUNCTIONALITY ==========
+    const flipContainer = document.getElementById('flipContainer');
+    const mainFab = document.getElementById('mainFab');
+    const closeMark = document.getElementById('closeMark');
+    if(mainFab && closeMark && flipContainer) {
+      mainFab.addEventListener('click', (e) => { e.stopPropagation(); flipContainer.classList.toggle('open'); });
+      closeMark.addEventListener('click', (e) => { e.stopPropagation(); flipContainer.classList.remove('open'); });
+      document.addEventListener('click', (e) => { if (!flipContainer.contains(e.target)) flipContainer.classList.remove('open'); });
+    }
+
+
+
+
+
+
+
+
+
+
+    // ========== MAIN SALON FUNCTIONALITY ==========
+    (function() {
+      const services = [
+        { id:3, name:'Facial', desc:'Deep cleansing organic facial', price:899, originalPrice:1099, img:'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800', points: ['✨ Organic products', '🧖‍♀️ Steam therapy', '💧 Hydrating mask', '🌿 60 min'] },
+        { id:4, name:'Manicure', desc:'Nail shaping & gel polish', price:599, originalPrice:699, img:'https://i.ibb.co/NdChZhvM/mani.jpg', points: ['💅 Gel options', '💆 Hand massage', '🌈 50+ colors', '🕒 45 min'] },
+        { id:5, name:'Pedicure', desc:'Foot spa with callus removal', price:699, originalPrice:849, img:'https://i.ibb.co/kgSvK2S7/pedi.jpg', points: ['🦶 Callus removal', '💆 Relaxing massage', '🌿 Natural scrubs', '💧 Hydrating mask'] },
+        { id:1, name:'Haircut', desc:'Precision cut & styling by experts', price:399, originalPrice:499, img:'https://i.ibb.co/HpbYj6xJ/hair-Cut.jpg', points: ['✂️ Expert stylists', '🕒 30 min session', '☕ Free coffee', '📅 Flexible timing'] },
+        { id:2, name:'Hair Color', desc:'Professional ammonia-free color', price:1499, originalPrice:1799, img:'https://i.ibb.co/QFbC2V4b/haircolor.jpg', points: ['🎨 Ammonia-free', '💆‍♀️ Scalp protection', '🌟 Long lasting', '🌈 30+ shades'] }
+      ];
+
+      const galleryImages = ['Gall1','Gall2','Gall3'];
+      const offers = [{ title:'🔥 Your Offer', discount:'30% off', code:'WELCOME30', img:'https://i.ibb.co/ds3prmgt/20260422-155108.png', saved:'30%' },{ title:'Save Together', discount:'20% off', code:'BOTH20', img:'https://i.ibb.co/jFQwtb9/20260422-155024.png', saved:'20%' }];
+
+      let timerExpiry = localStorage.getItem('firstOfferTimer') || Date.now() + 72*60*60*1000;
+      if(!localStorage.getItem('firstOfferTimer')) localStorage.setItem('firstOfferTimer', timerExpiry);
+      else timerExpiry = parseInt(timerExpiry);
+      
+      let selectedServices = JSON.parse(localStorage.getItem('selectedServices')) || [];
+      let appliedDiscount = 0;
+      let appliedCouponCode = '';
+
+      const serviceSwiper = document.getElementById('serviceSwiper');
+      const gallerySwiper = document.getElementById('gallerySwiper');
+      const offerSwiper = document.getElementById('offerSwiper');
+      const summarySpan = document.getElementById('selectedServicesSummary');
+      const priceDisplay = document.getElementById('priceDisplay');
+      const couponStatus = document.getElementById('couponStatus');
+      const strikethroughInfo = document.getElementById('strikethroughInfo');
+      const bookName = document.getElementById('bookName');
+      const bookPhone = document.getElementById('bookPhone');
+      const welcomeMsg = document.getElementById('welcomeMessage');
+      const summaryPopup = document.getElementById('summaryPopup');
+      const summaryChosen = document.getElementById('summaryChosen');
+      const summaryAvailable = document.getElementById('summaryAvailable');
+      const detailPopup = document.getElementById('serviceDetailPopup');
+      const detailContent = document.getElementById('detailPopupContent');
+      const offerPopup = document.getElementById('offerSuccessPopup');
+      const offerPopupContent = document.getElementById('offerPopupContent');
+      const couponInput = document.getElementById('couponInput');
+      const couponMsg = document.getElementById('couponMessage');
+      const timeInput = document.getElementById('bookTime');
+      const bookingForm = document.getElementById('bookingForm');
+      const submitBtn = document.getElementById('submitBookingBtn');
+
+      function calculateTotal() {
+        let total = selectedServices.reduce((sum, id) => sum + (services.find(s=>s.id===id)?.price||0), 0);
+        if (appliedDiscount > 0) total = total * (1 - appliedDiscount);
+        return Math.round(total);
+      }
+
+      function updateUI() {
+        let namesHtml = selectedServices.map(id => { let s = services.find(s => s.id === id); return `<span class="service-name-click inline-block mr-1" data-id="${id}" style="cursor:pointer;">${s?.name}</span>`; }).join(', ');
+        summarySpan.innerHTML = namesHtml || 'None';
+        document.querySelectorAll('.service-name-click').forEach(el => { el.addEventListener('click', (e) => { e.stopPropagation(); let id = parseInt(el.dataset.id); let s = services.find(x => x.id === id); if(s) openServicePopup(s); }); });
+        let total = calculateTotal();
+        let originalTotal = selectedServices.reduce((sum, id) => sum + (services.find(s=>s.id===id)?.price||0), 0);
+        if (appliedDiscount > 0) {
+          priceDisplay.innerHTML = `₹<span class="line-through opacity-50 mr-2">${originalTotal}</span> ₹${total}`;
+          couponStatus.innerText = `✅ Coupon ${appliedCouponCode} applied (${appliedDiscount*100}% off)`;
+          strikethroughInfo.innerText = `You save ₹${Math.round(originalTotal * appliedDiscount)}`;
+        } else {
+          priceDisplay.innerText = `₹${total}`;
+          couponStatus.innerText = '';
+          strikethroughInfo.innerText = '';
+        }
+        localStorage.setItem('selectedServices', JSON.stringify(selectedServices));
+      }
+
+      function applyCouponCode(code) {
+        const validCoupons = { 'WELCOME30': 0.30, 'BOTH20': 0.15, 'FRIEND200': 0.10 };
+        if (validCoupons[code]) {
+          appliedDiscount = validCoupons[code];
+          appliedCouponCode = code;
+          couponMsg.innerText = `✅ ${code} applied! You get ${appliedDiscount*100}% off`;
+          couponMsg.style.color = '#16a34a';
+          updateUI();
+          renderServices();
+        } else if (code === '') {
+          appliedDiscount = 0; appliedCouponCode = ''; couponMsg.innerText = ''; updateUI(); renderServices();
+        } else {
+          couponMsg.innerText = '❌ Invalid coupon code'; couponMsg.style.color = '#dc2626';
+          setTimeout(() => { couponMsg.innerText = ''; couponMsg.style.color = '#16a34a'; }, 3000);
+        }
+      }
+
+      function createInfiniteArray(arr, times = 25) { let result = []; for (let i = 0; i < times; i++) result.push(...arr); return result; }
+
+      function openServicePopup(s) { 
+        let pointsHtml = s.points.map(p => `<li class="flex items-start gap-2"><i class="fas fa-check-circle text-amber-600 mt-1"></i><span>${p}</span></li>`).join('');
+        detailContent.innerHTML = `<img src="${s.img}" class="popup-img-full"><div class="popup-content"><h3 class="text-2xl font-bold mb-2">${s.name}</h3><p class="mb-3">${s.desc}</p><div class="flex items-center gap-3 mb-4"><span class="text-3xl font-black text-amber-600">₹${s.price}</span><span class="text-lg line-through opacity-50">₹${s.originalPrice}</span><span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm">${Math.round(((s.originalPrice - s.price) / s.originalPrice) * 100)}% off</span></div><p class="font-semibold mb-2">✨ Why choose us</p><ul class="space-y-2 mb-5">${pointsHtml}</ul><a href="#book?service=${s.id}" class="add-from-detail block w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-full font-semibold text-center transition"><i class="fas fa-plus-circle mr-2"></i> Add to booking</a></div>`;
+        detailPopup.style.display = 'flex'; document.body.classList.add('popup-open');
+        const closeBtn = document.createElement('span'); closeBtn.className = 'popup-close-fixed'; closeBtn.innerHTML = '✕'; detailPopup.appendChild(closeBtn);
+        closeBtn.addEventListener('click', () => { detailPopup.style.display = 'none'; document.body.classList.remove('popup-open'); closeBtn.remove(); });
+        const addLink = detailContent.querySelector('.add-from-detail'); addLink.addEventListener('click', (e) => { e.preventDefault(); if (!selectedServices.includes(s.id)) selectedServices.push(s.id); updateUI(); renderServices(); detailPopup.style.display = 'none'; document.body.classList.remove('popup-open'); closeBtn.remove(); });
+      }
+
+      function renderServices() { 
+        if (!serviceSwiper) return; serviceSwiper.innerHTML = '';
+        createInfiniteArray(services, 25).forEach((s) => { let isSelected = selectedServices.includes(s.id); let discount = Math.round(((s.originalPrice - s.price) / s.originalPrice) * 100); let card = document.createElement('div'); card.className = 'snap-card'; card.innerHTML = `<img src="${s.img}" class="service-img" loading="lazy"><div class="service-content"><h3 class="text-3xl font-bold mb-1 service-title" data-id="${s.id}">${s.name}</h3><p class="text-gray-500 dark:text-gray-400 mb-3">${s.desc}</p><div class="flex items-center gap-3 mb-4"><span class="text-3xl font-black text-amber-600">₹${s.price}</span><span class="text-lg line-through opacity-50">₹${s.originalPrice}</span><span class="bg-green-500 text-white px-2 py-0.5 rounded-full text-xs">${discount}% off</span></div><div class="flex gap-2 justify-center"><button data-id="${s.id}" class="add-remove-btn ${isSelected ? 'bg-red-500' : 'bg-amber-600'} text-white px-4 py-2 rounded-full text-sm"><i class="fas ${isSelected ? 'fa-trash-alt' : 'fa-plus'}"></i> ${isSelected ? 'Remove' : 'Add'}</button><button data-id="${s.id}" class="view-all-summary bg-gray-600 text-white px-4 py-2 rounded-full text-sm"><i class="fas fa-th"></i> View All</button></div></div>`; 
+        serviceSwiper.appendChild(card); });
+        document.querySelectorAll('.add-remove-btn').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); let id = parseInt(btn.dataset.id); if (selectedServices.includes(id)) selectedServices = selectedServices.filter(x => x !== id); else selectedServices.push(id); updateUI(); renderServices(); }); });
+        document.querySelectorAll('.view-all-summary').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); openSummaryPopup(); }); });
+        document.querySelectorAll('.service-title').forEach(title => { title.addEventListener('click', (e) => { e.stopPropagation(); let id = parseInt(title.dataset.id); let s = services.find(x => x.id === id); if(s) openServicePopup(s); }); });
+      }
+
+      function renderGallery() { if (!gallerySwiper) return; gallerySwiper.innerHTML = ''; createInfiniteArray(galleryImages, 20).forEach(src => { let card = document.createElement('div'); card.className = 'gallery-card'; card.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('${src}')`; gallerySwiper.appendChild(card); }); }
+      
+      function renderOffers() { if (!offerSwiper) return; offerSwiper.innerHTML = ''; createInfiniteArray(offers, 25).forEach((o, idx) => { let isFirstReal = o.title === offers[0].title && idx % offers.length === 0; let isExpired = Date.now() > timerExpiry; let card = document.createElement('div'); card.className = 'offer-card'; card.innerHTML = `<img src="${o.img}" class="offer-img" loading="lazy"><div class="offer-content"><h3 class="font-bold text-xl">${o.title}</h3><p class="text-amber-600 font-bold text-2xl">${o.discount}</p></div>`; if (isFirstReal && !isExpired) { let timerDiv = document.createElement('div'); timerDiv.className = 'timer-badge'; timerDiv.id = 'firstOfferTimer'; card.appendChild(timerDiv); } else if (isFirstReal && isExpired) { let expiredDiv = document.createElement('div'); expiredDiv.className = 'timer-badge'; expiredDiv.innerText = 'Expired'; expiredDiv.style.color = '#ff6666'; card.appendChild(expiredDiv); } card.addEventListener('click', () => { if (isFirstReal && Date.now() > timerExpiry) { alert('This offer has expired.'); return; } offerPopupContent.innerHTML = `<img src="${o.img}" class="popup-img-full"><div class="popup-content"><h3 class="text-2xl font-bold mb-2 text-center">${o.title}</h3><p class="text-3xl font-black text-amber-600 text-center mb-2">${o.discount}</p><p class="mb-3 text-center">Use code: <span class="font-mono px-3 py-1 rounded">${o.code}</span></p><p class="text-green-600 font-semibold mb-4 text-center">✅ Code applied! You save ${o.saved} on any service.</p><button class="close-offer-popup w-full bg-amber-600 text-white py-2 rounded-full">Continue</button></div>`; offerPopup.style.display = 'flex'; document.body.classList.add('popup-open'); const closeBtn = document.createElement('span'); closeBtn.className = 'popup-close-fixed'; closeBtn.innerHTML = '✕'; offerPopup.appendChild(closeBtn); closeBtn.addEventListener('click', () => { offerPopup.style.display = 'none'; document.body.classList.remove('popup-open'); closeBtn.remove(); }); offerPopupContent.querySelector('.close-offer-popup').addEventListener('click', () => { offerPopup.style.display = 'none'; document.body.classList.remove('popup-open'); closeBtn.remove(); }); couponInput.value = o.code; applyCouponCode(o.code); }); offerSwiper.appendChild(card); }); function updateTimer() { let remaining = timerExpiry - Date.now(); let timerEl = document.getElementById('firstOfferTimer'); if(timerEl) { if(remaining<=0) timerEl.innerText='Expired'; else { let h=Math.floor(remaining/3600000); let m=Math.floor((remaining%3600000)/60000); timerEl.innerText=`${h}h ${m}m`; } } } setInterval(updateTimer, 1000); updateTimer(); }
+
+      function openSummaryPopup() { summaryChosen.innerHTML = '<h4 class="font-semibold">Chosen Services</h4>'; if (selectedServices.length === 0) { summaryChosen.innerHTML += '<p class="text-gray-500">No services selected yet</p>'; } else { selectedServices.forEach(id => { let s = services.find(x => x.id === id); if(s) { let div = document.createElement('div'); div.className = 'flex justify-between items-center p-2 bg-amber-50 dark:bg-amber-900/20 rounded-xl'; div.innerHTML = `<span class="service-name-click" data-id="${id}" style="cursor:pointer;">${s.name} - ₹${s.price}</span><button data-id="${id}" class="remove-inline text-red-500"><i class="fas fa-trash-alt"></i></button>`; summaryChosen.appendChild(div); } }); } summaryAvailable.innerHTML = '<h4 class="font-semibold mt-4">Available Services</h4>'; services.forEach(s => { if(!selectedServices.includes(s.id)) { let div = document.createElement('div'); div.className = 'flex justify-between items-center p-2 border-b'; div.innerHTML = `<span>${s.name} – ₹${s.price}</span><button data-id="${s.id}" class="add-inline bg-amber-600 text-white px-3 py-1 rounded-full text-sm"><i class="fas fa-plus"></i> Add</button>`; summaryAvailable.appendChild(div); } }); document.querySelectorAll('.service-name-click').forEach(el => { el.addEventListener('click', (e) => { let id = parseInt(el.dataset.id); let s = services.find(x => x.id === id); if(s) { openServicePopup(s); summaryPopup.style.display = 'none'; document.body.classList.remove('popup-open'); } }); }); document.querySelectorAll('.remove-inline').forEach(btn => { btn.addEventListener('click', (e) => { let id = parseInt(btn.dataset.id); selectedServices = selectedServices.filter(x => x !== id); updateUI(); renderServices(); openSummaryPopup(); }); }); document.querySelectorAll('.add-inline').forEach(btn => { btn.addEventListener('click', (e) => { let id = parseInt(btn.dataset.id); if(!selectedServices.includes(id)) selectedServices.push(id); updateUI(); renderServices(); openSummaryPopup(); }); }); summaryPopup.style.display = 'flex'; document.body.classList.add('popup-open'); }
+
+      // ========== FORM SUBMISSION WITH REDIRECT TO APPOINTMENT.HTML ==========
+      async function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('bookName').value.trim();
+        const phone = document.getElementById('bookPhone').value.trim();
+        const date = document.getElementById('bookDate').value;
+        const time = document.getElementById('bookTime').value;
+        const message = document.getElementById('bookMsg').value.trim();
+        const coupon = appliedCouponCode || 'None';
+        const selectedServicesList = selectedServices.map(id => services.find(s => s.id === id)?.name).filter(Boolean).join(', ');
+        const totalAmount = calculateTotal();
+        const originalTotal = selectedServices.reduce((sum, id) => sum + (services.find(s=>s.id===id)?.price||0), 0);
+        const discountPercent = appliedDiscount * 100;
+        
+        if (!name || !phone || !date || !time) {
+          swal("Error", "Please fill all required fields!", "error");
+          return;
+        }
+        if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+          swal("Error", "Please enter a valid 10-digit phone number!", "error");
+          return;
+        }
+        if (selectedServices.length === 0) {
+          swal("Error", "Please select at least one service!", "error");
+          return;
+        }
+        
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting...';
+        }
+        
+        try {
+          // Submit to Google Sheets
+          const formData = new FormData();
+          formData.append('timestamp', new Date().toISOString());
+          formData.append('name', name);
+          formData.append('phone', phone);
+          formData.append('date', date);
+          formData.append('time', time);
+          formData.append('services', selectedServicesList);
+          formData.append('message', message);
+          formData.append('coupon', coupon);
+          formData.append('totalAmount', totalAmount);
+          formData.append('discountPercent', discountPercent);
+          
+          const response = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+            method: "POST",
+            body: formData
+          });
+          
+          const result = await response.json();
+          
+          if (result.result === 'success') {
+            // Save to localStorage
+            const bookingData = {
+              name: name, phone: phone, date: date, time: time,
+              message: message, services: selectedServicesList,
+              totalAmount: totalAmount, originalTotal: originalTotal,
+              couponCode: appliedCouponCode || 'none', discount: discountPercent
+            };
+            localStorage.setItem('lastBooking', JSON.stringify(bookingData));
+            
+            // Clear selections
+            selectedServices = [];
+            appliedDiscount = 0;
+            appliedCouponCode = '';
+            updateUI();
+            renderServices();
+            
+            // Build redirect URL
+            const redirectUrl = `next//Appointment.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&message=${encodeURIComponent(message)}&service=${encodeURIComponent(selectedServicesList)}&am=${totalAmount}&original=${originalTotal}&code=${encodeURIComponent(appliedCouponCode || 'none')}`;
+            
+            // Redirect
+            window.location.href = redirectUrl;
+          } else {
+            throw new Error(result.error || 'Submission failed');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          swal("Error", "Something went wrong. Please try again!", "error");
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Confirm booking';
+          }
+        }
+      }
+      
+
+
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', handleFormSubmit);
+      }
+      
+      document.getElementById('viewSummaryBtn')?.addEventListener('click', openSummaryPopup);
+      document.getElementById('closeSummaryPopup')?.addEventListener('click', () => { summaryPopup.style.display = 'none'; document.body.classList.remove('popup-open'); });
+      document.getElementById('applyCouponBtn')?.addEventListener('click', () => applyCouponCode(couponInput.value.trim().toUpperCase()));
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('bookDate')?.setAttribute('min', today);
+      if(timeInput) { timeInput.setAttribute('min', '06:00'); timeInput.setAttribute('max', '22:00'); }
+      
+      function parseUrl() { let hash = window.location.hash; if(hash.startsWith('#book?')) { let params = new URLSearchParams(hash.replace('#book?','')); let serviceIds = params.get('service')?.split(',').map(Number) || []; serviceIds.forEach(id => { if(!selectedServices.includes(id) && services.find(s=>s.id===id)) selectedServices.push(id); }); updateUI(); renderServices(); document.getElementById('book')?.scrollIntoView(); } }
+      
+      function animateCounters() { [{id:'counterCustomers',val:5320},{id:'counterProjects',val:6850},{id:'counterReviews',val:1740},{id:'counterVisitors',val:31}].forEach(c=>{ let el = document.getElementById(c.id); if(el) { let cur=0, step=Math.ceil(c.val/50); let t=setInterval(()=>{ cur+=step; if(cur>=c.val) { cur=c.val; clearInterval(t); } el.innerText=cur; },20); } }); }
+      function loadMemory() { let name = localStorage.getItem('userName') || ''; let phone = localStorage.getItem('userPhone') || ''; if(name && bookName) bookName.value = name; if(phone && bookPhone) bookPhone.value = phone; if(name && welcomeMsg) welcomeMsg.innerText = `👋 Welcome back, ${name}!`; updateUI(); }
+      if(bookingForm) { bookingForm.addEventListener('input', () => { if(bookName) localStorage.setItem('userName', bookName.value); if(bookPhone) localStorage.setItem('userPhone', bookPhone.value); }); }
+      function setupAutoScroll(swiper) { if(!swiper) return; setInterval(() => { let maxScroll = swiper.scrollWidth - swiper.clientWidth; if (swiper.scrollLeft >= maxScroll - 10) swiper.scrollLeft = 0; else swiper.scrollLeft += swiper.clientWidth; }, 5000); }
+      
+      window.addEventListener('load', () => { renderServices(); renderGallery(); renderOffers(); loadMemory(); parseUrl(); animateCounters(); setupAutoScroll(serviceSwiper); setupAutoScroll(gallerySwiper); setupAutoScroll(offerSwiper); });
+      window.addEventListener('hashchange', parseUrl);
+    })();
+
+
+
+</script>
+
+</html>
+
