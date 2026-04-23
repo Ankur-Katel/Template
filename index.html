@@ -280,8 +280,8 @@ Website by <a href="https://wa.me/917896011657?text=Hi%20Ankur%2C%20I%20Want%20a
         { id:2, name:'Hair Color', desc:'Professional ammonia-free color', price:1499, originalPrice:1799, img:'https://i.ibb.co/QFbC2V4b/haircolor.jpg', points: ['🎨 Ammonia-free', '💆‍♀️ Scalp protection', '🌟 Long lasting', '🌈 30+ shades'] }
       ];
 
-      const galleryImages = ['Gall1','Gall2','Gall3'];
-      const offers = [{ title:'🔥 Your Offer', discount:'30% off', code:'WELCOME30', img:'https://i.ibb.co/ds3prmgt/20260422-155108.png', saved:'30%' },{ title:'Save Together', discount:'20% off', code:'BOTH20', img:'https://i.ibb.co/jFQwtb9/20260422-155024.png', saved:'20%' }];
+      const galleryImages = ['https://i.ibb.co/LznBZ8fT/20260423-153657.png','https://i.ibb.co/LznBZ8fT/20260423-153657.png'];
+      const offers = [{ title:'🔥 Your Offer', discount:'30% off', code:'WELCOME30', img:'https://i.ibb.co/ds3prmgt/20260422-155108.png', saved:'30%' },{ title:'Save Together', discount:'20% off', code:'BOTH20', img:'https://i.ibb.co/jFQwtb9/20260422-155024.png', saved:'20%' },{ title:'Your Offer', discount:'50% off', code:'OFF50', img:'https://i.ibb.co/S4RLXw7f/20260423-154447.png', saved:'50%' }];
 
       let timerExpiry = localStorage.getItem('firstOfferTimer') || Date.now() + 72*60*60*1000;
       if(!localStorage.getItem('firstOfferTimer')) localStorage.setItem('firstOfferTimer', timerExpiry);
@@ -339,7 +339,7 @@ Website by <a href="https://wa.me/917896011657?text=Hi%20Ankur%2C%20I%20Want%20a
       }
 
       function applyCouponCode(code) {
-        const validCoupons = { 'WELCOME30': 0.30, 'BOTH20': 0.15, 'FRIEND200': 0.10 };
+        const validCoupons = { 'WELCOME30': 0.30, 'BOTH20': 0.15, 'OFF50': 0.50 };
         if (validCoupons[code]) {
           appliedDiscount = validCoupons[code];
           appliedCouponCode = code;
