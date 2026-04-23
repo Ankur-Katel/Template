@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>404 · Page Not Found | GLEAM Salon</title>
+  <meta name="description" content="The page you're looking for doesn't exist or has been moved. Return to GLEAM Salon homepage.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:opsz@14..32&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { font-family: 'Inter', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+    h1, h2, h3, .heading { font-family: 'Playfair Display', 'Montserrat', serif; font-weight: 800; letter-spacing: -0.02em; }
+
+    :root {
+      --bg: #fefcf5;
+      --card-bg: #ffffff;
+      --text: #1e1b1b;
+      --text-light: #5b534b;
+      --border-light: #e9e1d6;
+      --accent: #f97316;
+      --accent-dark: #ea580c;
+    }
+
+    .dark {
+      --bg: #1a1412;
+      --card-bg: #2d241f;
+      --text: #f3ede8;
+      --text-light: #cbc3bc;
+      --border-light: #4b3f37;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.2s ease, color 0.2s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Floating animation for image */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+    .floating-image {
+      animation: float 5s ease-in-out infinite;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* Button styles matching main site */
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 0.85rem 2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.85rem 2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.2);
+    }
+
+    /* Theme toggle */
+    .theme-switch {
+      position: relative;
+      display: inline-block;
+      width: 64px;
+      height: 32px;
+    }
+    .theme-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider-toggle {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #d4b8a0;
+      border-radius: 32px;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6px;
+      color: white;
+      font-size: 14px;
+    }
+    .slider-toggle:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    .slider-toggle .sun-icon, .slider-toggle .moon-icon {
+      z-index: 2;
+      font-size: 14px;
+    }
+    input:checked + .slider-toggle {
+      background-color: #5d4b3a;
+    }
+    input:checked + .slider-toggle:before {
+      transform: translateX(32px);
+    }
+
+    /* Image Container - No border radius, larger size */
+    .image-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Footer links styling */
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Fixed Bottom Row - No background box, centered button + WhatsApp icon */
+    .fixed-bottom-row {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 200;
+      padding: 0 20px;
+    }
+    .book-now-btn {
+      background: var(--accent);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+    .book-now-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(249, 115, 22, 0.45);
+    }
+    .whatsapp-icon {
+      background: #25D366;
+      color: white;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+      text-decoration: none;
+      border: none;
+    }
+    .whatsapp-icon:hover {
+      transform: scale(1.08);
+      background: #128C7E;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    }
+
+    @media (max-width: 640px) {
+      .btn-primary, .btn-secondary {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+      }
+      .image-container {
+        max-width: 320px;
+      }
+      .footer-links {
+        gap: 1rem;
+      }
+      .footer-links a {
+        font-size: 0.8rem;
+      }
+      .book-now-btn {
+        padding: 10px 24px;
+        font-size: 0.85rem;
+        gap: 8px;
+      }
+      .whatsapp-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 24px;
+      }
+      .fixed-bottom-row {
+        bottom: 15px;
+        gap: 15px;
+      }
+    }
+  </style>
+
+    <link rel="stylesheet" href="CSS//footer.css">
+</head>
+<body>
+
+  <!-- Navigation (matching main site) -->
+  <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800 px-4 md:px-8 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3 cursor-pointer" id="logoHomeLink">
+      <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=80&h=80&fit=crop&auto=format" class="w-10 h-10 rounded-full object-cover border-2 border-amber-600" alt="GLEAM Logo">
+      <span class="text-4xl font-black heading text-amber-800 dark:text-amber-300 tracking-tight">GLEAM</span>
+    </div>
+    <div class="hidden md:flex gap-6 font-medium items-center">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#offers">Offers</a>
+      <a href="index.html#book">Book</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <label class="theme-switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider-toggle">
+          <i class="fas fa-sun sun-icon"></i>
+          <i class="fas fa-moon moon-icon"></i>
+        </span>
+      </label>
+      <a href="index.html#book" class="btn-primary hidden md:inline-flex py-2 px-4 text-sm"><i class="fas fa-calendar-alt mr-1"></i>Book</a>
+    </div>
+  </nav>
+
+  <!-- Main 404 Content -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12 md:py-16">
+    <div class="max-w-4xl w-full mx-auto text-center animate-fade-up">
+      
+      <!-- Image - 1:1, No border radius, Larger size -->
+      <div class="image-container mx-auto floating-image mb-8">
+        <img src="https://i.ibb.co/My2ST48p/29e26017-ef60-443f-bdc9-ee5806a58553.png" 
+             alt="404 - Page Not Found" 
+             id="errorImage"
+             loading="eager">
+      </div>
+
+      <!-- Buttons below image -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+        <a href="index.html" class="btn-primary">
+          <i class="fas fa-home"></i> Go Back Home
+        </a>
+        <button id="contactSupportBtn" class="btn-secondary">
+          <i class="fas fa-headset"></i> Contact Support
+        </button>
+      </div>
+
+      <!-- Text Content -->
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold heading mb-3 text-amber-700 dark:text-amber-400">
+        Oops! Page Not Found
+      </h2>
+      <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-3">
+        The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+      </p>
+      <p class="text-base text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+        But don't worry — our salon experts are still here to give you the perfect look.
+      </p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div><div class="flex items-center gap-2 mb-4"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03" class="w-10 h-10 rounded-full object-cover border-2 border-amber-600"><span class="text-2xl font-black heading text-amber-800 dark:text-amber-300">GLEAM</span></div><p class="text-gray-600 dark:text-gray-400 text-sm">Premium salon experience in the heart of Guwahati.</p></div>
+        <div><h4 class="font-bold mb-3 text-gray-800 dark:text-white">Quick Links</h4><ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+          <li><a class='hover:text-amber-600 transition' href='next/review.html'>Review</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/service.html'>All Services</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/chat.html'>Chat Bot</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/aboutus.html'>About Us</a></li>
+          <li><a href="next/t&c.html#" class="hover:text-amber-600 transition">T&C*</a></li>
+          <li><a href="next/t&c.html#" class="hover:text-amber-600 transition">Contect Us</a></li>
+          <li><a href="next/t&c.html#" class="hover:text-amber-600 transition">Privat policy</a></li>
+          <li><a class='hover:text-amber-600 transition' href='#book'>Book Appointment</a></li>
+          <li><a class='hover:text-amber-600 transition' href='next/accademy.html'>Accademy</a></li>
+        </ul></div>
+        <div><h4 class="font-bold mb-3 text-gray-800 dark:text-white">Contact</h4><ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400"><li><i class="fas fa-phone mr-2 text-amber-600"></i> +91 98765 43210</li><li><i class="fab fa-whatsapp mr-2 text-green-500"></i> +91 98765 43210</li><li><i class="fas fa-map-marker-alt mr-2 text-amber-600"></i> Christian Basti, Guwahati</li></ul></div>
+      </div>
+      <div class="border-t border-gray-200 dark:border-gray-700 pt-6 text-center text-sm text-gray-500 dark:text-gray-400"><p>&copy; 2025 GLEAM Salon. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <!-- Fixed Bottom Row - Centered Book Appointment Button + WhatsApp Icon -->
+  <div class="fixed-bottom-row">
+    <a href="index.html#book" class="book-now-btn">
+      <i class="fas fa-calendar-alt"></i> Book Appointment Now
+    </a>
+    <div id="whatsappBtn" class="whatsapp-icon" style="cursor: pointer;">
+      <i class="fab fa-whatsapp"></i>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Theme toggle
+      const themeCheck = document.getElementById('themeToggle');
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark');
+        if (themeCheck) themeCheck.checked = true;
+      }
+      if (themeCheck) {
+        themeCheck.addEventListener('change', () => {
+          document.body.classList.toggle('dark', themeCheck.checked);
+          localStorage.setItem('theme', themeCheck.checked ? 'dark' : 'light');
+        });
+      }
+
+      // Logo click: go to home
+      const logo = document.getElementById('logoHomeLink');
+      if (logo) {
+        logo.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+      }
+
+      // Function to open both WhatsApp and chat.html
+      function openWhatsAppAndChat(message) {
+        const encodedMessage = encodeURIComponent(message);
+        // Open WhatsApp
+        window.open(`https://wa.me/919876543210?text=${encodedMessage}`, '_blank');
+        // Open chat.html with same message
+        window.open(`chat.html?message=${encodedMessage}`, '_blank');
+      }
+
+      // Contact Support Button
+      const contactBtn = document.getElementById('contactSupportBtn');
+      if (contactBtn) {
+        contactBtn.addEventListener('click', () => {
+          openWhatsAppAndChat("I need support for 404 error - page not found");
+        });
+      }
+
+      // Fixed Bottom WhatsApp Button
+      const whatsappBtn = document.getElementById('whatsappBtn');
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+          openWhatsAppAndChat("Hi! I need help with booking an appointment at GLEAM Salon");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
