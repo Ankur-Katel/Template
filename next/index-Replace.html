@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Smart Bulk HTML Editor | Salon Template Customizer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f4f7fc 0%, #e9eef3 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      padding: 2rem 1.5rem;
+      color: #1a2c3e;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1E3C4C, #2B5C6F);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .hero p {
+      color: #4a627a;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 32px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.02);
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Code editor section */
+    .code-editor-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .code-editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      gap: 12px;
+    }
+
+    .code-editor-header h3 {
+      font-weight: 600;
+      color: #1a5c74;
+    }
+
+    .code-textarea {
+      width: 100%;
+      min-height: 300px;
+      padding: 1rem;
+      border-radius: 20px;
+      border: 1px solid #cbdde6;
+      font-family: 'SF Mono', 'Courier New', monospace;
+      font-size: 0.85rem;
+      background: #fefefe;
+      resize: vertical;
+    }
+
+    .code-textarea:focus {
+      outline: none;
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.2);
+    }
+
+    .code-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-save-code {
+      background: #2c7da0;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-save-code:hover {
+      background: #1e5b74;
+      transform: translateY(-2px);
+    }
+
+    .btn-run-code {
+      background: #1f6e8c;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-run-code:hover {
+      background: #0e5a75;
+      transform: translateY(-2px);
+    }
+
+    .upload-area {
+      border: 2px dashed #bdd3e6;
+      border-radius: 28px;
+      background: #fefefe;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .upload-area:hover {
+      border-color: #2c7da0;
+      background: #f0f7fc;
+    }
+
+    .upload-label {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      color: #1e5b74;
+    }
+
+    .upload-icon {
+      font-size: 2.5rem;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .file-list {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #2c5a6e;
+      background: #eef3f7;
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+      display: inline-block;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .saved-files-section {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .saved-files-display {
+      font-size: 0.85rem;
+      color: #2c5a6e;
+      background: #eef3f7;
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+      flex: 1;
+      min-width: 150px;
+      word-break: break-word;
+      white-space: normal;
+      text-align: left;
+    }
+    .btn-remove-files {
+      background: #fff0f0;
+      color: #b13e3e;
+      border: 1px solid #f0c0c0;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-remove-files:hover {
+      background: #ffe0e0;
+      transform: translateY(-1px);
+    }
+
+    .replacements-wrapper {
+      max-height: 520px;
+      overflow-y: auto;
+      border-radius: 24px;
+      margin-top: 1.2rem;
+      padding-right: 6px;
+    }
+
+    .replace-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .row-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid #e2edf2;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      transition: box-shadow 0.2s;
+    }
+
+    .row-card:hover {
+      box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.08);
+      border-color: #cde1ea;
+    }
+
+    .old-field {
+      flex: 2;
+      min-width: 180px;
+    }
+
+    .new-field {
+      flex: 2.5;
+      min-width: 200px;
+    }
+
+    .row-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #5c7e96;
+      margin-bottom: 4px;
+    }
+
+    .old-text-box {
+      background: #f2f6f9;
+      border: 1px solid #dce6ed;
+      border-radius: 16px;
+      padding: 0.7rem 1rem;
+      font-family: 'SF Mono', 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: #1f4a5e;
+      word-break: break-word;
+      width: 100%;
+      cursor: default;
+    }
+
+    .new-input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 16px;
+      border: 1px solid #cbdde6;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      background: white;
+    }
+
+    .new-input:focus {
+      outline: none;
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.2);
+    }
+
+    .action-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.2rem;
+      gap: 1rem;
+    }
+
+    .btn {
+      border: none;
+      padding: 0.85rem 1.9rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #eef2f6;
+      color: #1f4a5e;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .btn-primary {
+      background: #1f6e8c;
+      color: white;
+      box-shadow: 0 4px 10px rgba(31, 110, 140, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: #0e5a75;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -8px rgba(31, 110, 140, 0.4);
+    }
+
+    .btn-secondary {
+      background: #eef2f6;
+      border: 1px solid #cbdde6;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e9f0;
+      transform: translateY(-1px);
+    }
+
+    .stats {
+      background: #eef3f9;
+      border-radius: 60px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1a5c74;
+    }
+
+    .message-area {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .success-badge {
+      background: #dff3e6;
+      color: #1e6f3f;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+    }
+
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff2df;
+      color: #b45f06;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #b45f06;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Modal Popup Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 0;
+      border-radius: 32px;
+      width: 85%;
+      max-width: 900px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      animation: modalSlide 0.3s ease;
+    }
+    @keyframes modalSlide {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-header {
+      background: linear-gradient(135deg, #1E3C4C, #2B5C6F);
+      padding: 1.2rem 1.5rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      margin: 0;
+      font-weight: 600;
+    }
+    .close-modal {
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .close-modal:hover {
+      opacity: 0.7;
+    }
+    .modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      max-height: 60vh;
+    }
+    .modal-body pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1rem;
+      border-radius: 16px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .btn-copy {
+      background: #2c7da0;
+      color: white;
+    }
+    .btn-download-modal {
+      background: #1f6e8c;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #7d95ab;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem;
+      }
+      .card {
+        padding: 1.2rem;
+      }
+      .row-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .old-field, .new-field {
+        width: 100%;
+      }
+      .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn {
+        text-align: center;
+      }
+      .replacements-wrapper {
+        max-height: 460px;
+      }
+      .saved-files-section {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>✂️ Smart Bulk HTML Editor</h1>
+    <p>Paste HTML code → Fill replacement fields → Get replaced code instantly! (No file upload needed)</p>
+  </div>
+
+  <!-- Code Editor Section with Save & Run -->
+  <div class="card code-editor-section">
+    <div class="code-editor-header">
+      <h3>📝 Paste Your HTML Code Here</h3>
+      <div class="code-actions">
+        <button id="saveCodeBtn" class="btn-save-code">💾 Save Code</button>
+        <button id="runCodeBtn" class="btn-run-code">🚀 Replace & Show Result</button>
+      </div>
+    </div>
+    <textarea id="codeEditor" class="code-textarea" placeholder="Paste your HTML code here... Example: &lt;h1&gt;Salon Elegance&lt;/h1&gt;&lt;p&gt;Call (555) 123-4567&lt;/p&gt;"></textarea>
+    <div id="codeSaveMessage" style="margin-top: 0.75rem; font-size: 0.85rem;"></div>
+  </div>
+
+  <!-- Upload card (optional - for file processing) -->
+  <div class="card">
+    <div class="upload-area" id="uploadZone">
+      <label class="upload-label" for="fileInput">
+        <span class="upload-icon">📂📄</span>
+        <span>OR Upload HTML files (optional)</span>
+        <span style="font-size:0.75rem; opacity:0.7">.html or .htm</span>
+      </label>
+      <input type="file" id="fileInput" multiple accept=".html,.htm,.text/html">
+      <div id="fileListDisplay" class="file-list" style="display:none;"></div>
+    </div>
+    <div id="savedFilesContainer" style="margin-top: 12px;"></div>
+  </div>
+
+  <!-- Replacement rows -->
+  <div class="card">
+    <h3 style="margin-bottom: 1rem; font-weight: 600;">✍️ Replacement rules (30 items) - Fill only what you want to replace</h3>
+    <div class="replacements-wrapper" id="replacementsWrapper">
+      <div class="replace-grid" id="replaceGrid"></div>
+    </div>
+    <div class="action-bar">
+      <div class="stats" id="statsPreview">0 replacements ready</div>
+      <div style="display: flex; gap: 12px;">
+        <button class="btn btn-secondary" id="clearNewBtn">Clear all "New Text"</button>
+        <button class="btn btn-primary" id="replaceDownloadBtn">📥 Replace Files & Download</button>
+      </div>
+    </div>
+    <div id="messageArea" class="message-area"></div>
+  </div>
+  <footer>🔁 Empty "New Text" fields are skipped. Click "Replace & Show Result" to see replaced code instantly!</footer>
+</div>
+
+<!-- Modal Popup for Result -->
+<div id="resultModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>✅ Replacement Result</h3>
+      <span class="close-modal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p><strong>Replaced Code:</strong></p>
+      <pre id="resultCode"></pre>
+    </div>
+    <div class="modal-footer">
+      <button id="copyResultBtn" class="btn btn-copy">📋 Copy to Clipboard</button>
+      <button id="downloadResultBtn" class="btn btn-download-modal">💾 Download as HTML</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ========== OLD TEXTS (30 items) ==========
+  const OLD_TEXTS = [
+    "GLEAM",
+    "Premium salon",
+    "Guwahati",
+    "9876543210",
+    "98765 43210",
+    "Christian Basti",
+    "https://maps.google.com/?q=Christian+Basti+Guwahati",
+    "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=80&h=80&fit=crop&auto=format",
+    "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600",
+    "",
+    "10am",
+    "8pm",
+    "Gall1",
+    "Gall2",
+    "Gall3",
+    "maplink",
+    "06:00",
+    "22:00"
+  ];
+
+  let newInputFields = [];
+  const fileInput = document.getElementById('fileInput');
+  const fileListDisplay = document.getElementById('fileListDisplay');
+  const replaceGrid = document.getElementById('replaceGrid');
+  const replaceDownloadBtn = document.getElementById('replaceDownloadBtn');
+  const clearNewBtn = document.getElementById('clearNewBtn');
+  const messageArea = document.getElementById('messageArea');
+  const statsPreview = document.getElementById('statsPreview');
+  const savedFilesContainer = document.getElementById('savedFilesContainer');
+  const codeEditor = document.getElementById('codeEditor');
+  const saveCodeBtn = document.getElementById('saveCodeBtn');
+  const runCodeBtn = document.getElementById('runCodeBtn');
+  const codeSaveMessage = document.getElementById('codeSaveMessage');
+  
+  // Modal elements
+  const modal = document.getElementById('resultModal');
+  const resultCode = document.getElementById('resultCode');
+  const closeModal = document.querySelector('.close-modal');
+  const copyResultBtn = document.getElementById('copyResultBtn');
+  const downloadResultBtn = document.getElementById('downloadResultBtn');
+
+  // ========== MODAL FUNCTIONS ==========
+  function showModal(content) {
+    resultCode.textContent = content;
+    modal.style.display = 'block';
+  }
+
+  function closeModalFunc() {
+    modal.style.display = 'none';
+  }
+
+  closeModal.onclick = closeModalFunc;
+  window.onclick = function(event) {
+    if (event.target == modal) closeModalFunc();
+  }
+
+  copyResultBtn.onclick = function() {
+    navigator.clipboard.writeText(resultCode.textContent).then(() => {
+      showMessage("✅ Code copied to clipboard!", false, true);
+    }).catch(() => {
+      showMessage("❌ Failed to copy", true);
+    });
+  }
+
+  downloadResultBtn.onclick = function() {
+    const content = resultCode.textContent;
+    const blob = new Blob([content], { type: 'text/html' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = `replaced_code_${Date.now()}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showMessage("✅ File downloaded!", false, true);
+  }
+
+  // ========== CODE SAVE & LOAD FUNCTIONS ==========
+  function loadSavedCode() {
+    const savedCode = localStorage.getItem('saved_html_code');
+    if (savedCode) {
+      codeEditor.value = savedCode;
+      codeSaveMessage.innerHTML = '<span style="color: #1e6f3f;">✅ Previously saved code loaded from localStorage.</span>';
+      return true;
+    } else {
+      codeSaveMessage.innerHTML = '<span style="color: #7d95ab;">📌 No saved code found. Paste your code and click save.</span>';
+      return false;
+    }
+  }
+
+  function saveCodeToLocalStorage() {
+    const code = codeEditor.value;
+    if (code.trim() === '') {
+      codeSaveMessage.innerHTML = '<span style="color: #b13e3e;">⚠️ Cannot save empty code. Please paste some code first.</span>';
+      return;
+    }
+    localStorage.setItem('saved_html_code', code);
+    codeSaveMessage.innerHTML = '<span style="color: #1e6f3f;">✅ Code saved successfully to localStorage!</span>';
+    setTimeout(() => {
+      if (codeSaveMessage.innerHTML.includes('saved successfully')) {
+        codeSaveMessage.innerHTML = '<span style="color: #1e6f3f;">✅ Code saved! Click "Replace & Show Result" to apply replacements.</span>';
+      }
+    }, 2000);
+  }
+
+  // ========== APPLY REPLACEMENTS ON TEXT ==========
+  function applyReplacementsOnText(content, replacementsMap) {
+    let updatedContent = content;
+    for (let [oldStr, newStr] of replacementsMap.entries()) {
+      if (newStr === undefined || newStr === null || newStr === "") continue;
+      const escapedOld = oldStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(escapedOld, 'g');
+      updatedContent = updatedContent.replace(regex, newStr);
+    }
+    return updatedContent;
+  }
+
+  // Get current replacement map from input fields
+  function getReplacementMap() {
+    const replacementsMap = new Map();
+    for (let i = 0; i < OLD_TEXTS.length; i++) {
+      const newVal = newInputFields[i]?.value?.trim();
+      if (newVal !== undefined && newVal !== "") {
+        replacementsMap.set(OLD_TEXTS[i], newVal);
+      }
+    }
+    return replacementsMap;
+  }
+
+  // ========== MAIN RUN FUNCTION - NO FILE NEEDED ==========
+  async function runReplaceOnCode() {
+    const sourceCode = codeEditor.value;
+    
+    if (sourceCode.trim() === '') {
+      showMessage("❌ Please paste some HTML code in the editor first!", true);
+      return;
+    }
+    
+    const replacementsMap = getReplacementMap();
+    const activeCount = replacementsMap.size;
+    
+    if (activeCount === 0) {
+      showMessage("⚠️ No active replacements. Please fill at least one 'New Text' field.", true);
+      return;
+    }
+    
+    showMessage(`🔄 Applying ${activeCount} replacement rules on your code...`, false, false, true);
+    
+    // Simulate small delay for UX
+    await new Promise(r => setTimeout(r, 100));
+    
+    // Apply replacements
+    const replacedCode = applyReplacementsOnText(sourceCode, replacementsMap);
+    
+    // Count actual replacements
+    let replaceCount = 0;
+    for (let [oldStr, newStr] of replacementsMap.entries()) {
+      const escaped = oldStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(escaped, 'g');
+      const matches = sourceCode.match(regex);
+      if (matches) replaceCount += matches.length;
+    }
+    
+    // Show result in modal
+    showModal(replacedCode);
+    showMessage(`✅ Success! ${replaceCount} replacements applied. Result shown in popup.`, false, true);
+  }
+
+  // ========== FILE PROCESSING (for uploaded files) ==========
+  async function processFilesAndDownload() {
+    const files = fileInput.files;
+    if (files.length === 0) {
+      showMessage("❌ No files selected. Either paste code above OR select HTML files.", true);
+      return;
+    }
+
+    const replacementsMap = getReplacementMap();
+    const activeCount = replacementsMap.size;
+    
+    if (activeCount === 0) {
+      showMessage("⚠️ No active replacements. Please fill at least one 'New Text' field.", true);
+      return;
+    }
+
+    showMessage(`📁 Processing ${files.length} file(s) with ${activeCount} replacement rules...`, false, false, true);
+    replaceDownloadBtn.disabled = true;
+    
+    await new Promise(r => setTimeout(r, 20));
+
+    let successCount = 0;
+    let errorFiles = [];
+    let totalReplacementsApplied = 0;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (!file.name.match(/\.(html|htm)$/i) && file.type !== 'text/html') {
+        errorFiles.push(`${file.name} (skipped: not HTML)`);
+        continue;
+      }
+      try {
+        const content = await readFileAsText(file);
+        const newContent = applyReplacementsOnText(content, replacementsMap);
+        
+        let replaceCount = 0;
+        for (let [oldStr, newStr] of replacementsMap.entries()) {
+          const escaped = oldStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const regexAll = new RegExp(escaped, 'g');
+          const matches = content.match(regexAll);
+          if (matches) replaceCount += matches.length;
+        }
+        totalReplacementsApplied += replaceCount;
+        
+        downloadFile(newContent, `replaced_${file.name}`);
+        successCount++;
+      } catch (err) {
+        console.error(err);
+        errorFiles.push(`${file.name} (read error)`);
+      }
+    }
+
+    let msg = `✅ Processed ${successCount} of ${files.length} files. Total replacements: ${totalReplacementsApplied}. `;
+    if (errorFiles.length) msg += ` Issues: ${errorFiles.join(', ')}.`;
+    showMessage(msg, false, true, false);
+    
+    replaceDownloadBtn.disabled = false;
+  }
+
+  // ========== URL PARAMETER HANDLING ==========
+  function loadFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Fill replacement fields from URL params (1-30)
+    for (let i = 1; i <= 30; i++) {
+      const paramValue = urlParams.get(i.toString());
+      if (paramValue !== null && newInputFields[i-1]) {
+        let decoded = decodeURIComponent(paramValue).trim();
+        newInputFields[i-1].value = decoded;
+      }
+    }
+    
+    updateStats();
+    
+    // Check if auto-replace is requested
+    const autoReplace = urlParams.get('replace');
+    const autoRun = urlParams.get('run');
+    
+    if (autoReplace === 'yes' || autoRun === 'yes' || autoReplace === 'true' || autoRun === 'true') {
+      setTimeout(() => {
+        // Check if there's code in editor or files
+        if (codeEditor.value.trim() !== '') {
+          runReplaceOnCode();
+        } else if (fileInput.files.length > 0) {
+          processFilesAndDownload();
+        } else {
+          showMessage("ℹ️ Auto-replace requested but no code or files found. Please paste code or upload files.", false);
+        }
+      }, 500);
+    }
+  }
+
+  // ========== HELPER FUNCTIONS ==========
+  const STORAGE_KEY = "salon_editor_filenames";
+
+  function saveFilesToLocalStorage(fileNamesArray) {
+    if (fileNamesArray.length === 0) {
+      localStorage.removeItem(STORAGE_KEY);
+    } else {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(fileNamesArray));
+    }
+  }
+
+  function loadSavedFilesUI() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    let fileNames = [];
+    if (stored) {
+      try {
+        fileNames = JSON.parse(stored);
+        if (!Array.isArray(fileNames)) fileNames = [];
+      } catch(e) { fileNames = []; }
+    }
+    if (fileNames.length > 0) {
+      savedFilesContainer.innerHTML = `
+        <div class="saved-files-section">
+          <div class="saved-files-display">
+            📁 Previously selected files: ${escapeHtml(fileNames.join(', '))}
+          </div>
+          <button id="removeSavedFilesBtn" class="btn-remove-files">❌ Remove Saved Files</button>
+        </div>
+      `;
+      const removeBtn = document.getElementById('removeSavedFilesBtn');
+      if (removeBtn) {
+        removeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          localStorage.removeItem(STORAGE_KEY);
+          savedFilesContainer.innerHTML = '';
+          fileInput.value = '';
+          updateFileListUI();
+          showMessage("Saved file history removed and current selection cleared.", false);
+        });
+      }
+    } else {
+      savedFilesContainer.innerHTML = '';
+    }
+  }
+
+  function updateFileListUI() {
+    const files = fileInput.files;
+    if (files.length === 0) {
+      fileListDisplay.style.display = 'none';
+      fileListDisplay.innerText = '';
+      return;
+    }
+    const names = Array.from(files).map(f => f.name);
+    fileListDisplay.innerText = `📁 ${files.length} file(s): ${names.join(', ')}`;
+    fileListDisplay.style.display = 'inline-block';
+  }
+
+  function syncFileUIAndStorage() {
+    updateFileListUI();
+    const files = fileInput.files;
+    if (files.length === 0) {
+      saveFilesToLocalStorage([]);
+    } else {
+      const names = Array.from(files).map(f => f.name);
+      saveFilesToLocalStorage(names);
+    }
+    loadSavedFilesUI();
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function updateStats() {
+    if (!newInputFields.length) return;
+    let nonEmptyCount = 0;
+    for (let input of newInputFields) {
+      if (input.value.trim() !== "") nonEmptyCount++;
+    }
+    statsPreview.innerText = `${nonEmptyCount} / 30 active replacements (non-empty)`;
+  }
+
+  function buildReplacementRows() {
+    replaceGrid.innerHTML = '';
+    newInputFields = [];
+    for (let i = 0; i < OLD_TEXTS.length; i++) {
+      const oldVal = OLD_TEXTS[i];
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'row-card';
+
+      const oldCol = document.createElement('div');
+      oldCol.className = 'old-field';
+      oldCol.innerHTML = `
+        <div class="row-label">🔍 Old text (read-only)</div>
+        <div class="old-text-box">${escapeHtml(oldVal)}</div>
+      `;
+
+      const newCol = document.createElement('div');
+      newCol.className = 'new-field';
+      const newInput = document.createElement('input');
+      newInput.type = 'text';
+      newInput.placeholder = `Enter new value (empty = skip)`;
+      newInput.className = 'new-input';
+      newInput.value = '';
+      newInput.setAttribute('data-row-index', i);
+      newInput.addEventListener('input', () => {
+        updateStats();
+      });
+      newInputFields.push(newInput);
+      newCol.innerHTML = `<div class="row-label">✨ New text (editable)</div>`;
+      newCol.appendChild(newInput);
+      
+      rowDiv.appendChild(oldCol);
+      rowDiv.appendChild(newCol);
+      replaceGrid.appendChild(rowDiv);
+    }
+    updateStats();
+    loadFromURL();
+  }
+
+  function clearMessage() {
+    messageArea.innerHTML = '';
+  }
+
+  function showMessage(text, isError = false, isSuccess = false, isLoading = false) {
+    messageArea.innerHTML = '';
+    const msgDiv = document.createElement('div');
+    if (isLoading) {
+      msgDiv.className = 'loading';
+      msgDiv.innerHTML = `<div class="spinner"></div> ${text}`;
+    } else if (isSuccess) {
+      msgDiv.className = 'success-badge';
+      msgDiv.innerHTML = `✅ ${text}`;
+    } else if (isError) {
+      msgDiv.style.background = "#ffe6e5";
+      msgDiv.style.color = "#b13e3e";
+      msgDiv.style.padding = "0.4rem 1rem";
+      msgDiv.style.borderRadius = "40px";
+      msgDiv.innerHTML = `⚠️ ${text}`;
+    } else {
+      msgDiv.style.background = "#eef3fc";
+      msgDiv.style.padding = "0.4rem 1rem";
+      msgDiv.style.borderRadius = "40px";
+      msgDiv.innerHTML = text;
+    }
+    messageArea.appendChild(msgDiv);
+  }
+
+  function readFileAsText(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.onerror = (e) => reject(e);
+      reader.readAsText(file, "UTF-8");
+    });
+  }
+
+  function downloadFile(content, filename) {
+    const blob = new Blob([content], { type: 'text/html' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function clearAllNewFields() {
+    for (let input of newInputFields) {
+      input.value = '';
+    }
+    updateStats();
+    showMessage("All 'New Text' fields cleared. Replacements will be skipped until you fill them.", false);
+  }
+
+  function onFileInputChange() {
+    updateFileListUI();
+    const files = fileInput.files;
+    if (files.length === 0) {
+      saveFilesToLocalStorage([]);
+    } else {
+      const names = Array.from(files).map(f => f.name);
+      saveFilesToLocalStorage(names);
+    }
+    loadSavedFilesUI();
+    clearMessage();
+  }
+
+  const uploadZone = document.getElementById('uploadZone');
+  uploadZone.addEventListener('click', (e) => {
+    if (e.target.tagName !== 'INPUT' && e.target !== fileInput) {
+      fileInput.click();
+    }
+  });
+
+  fileInput.addEventListener('change', onFileInputChange);
+  replaceDownloadBtn.addEventListener('click', processFilesAndDownload);
+  clearNewBtn.addEventListener('click', clearAllNewFields);
+  saveCodeBtn.addEventListener('click', saveCodeToLocalStorage);
+  runCodeBtn.addEventListener('click', runReplaceOnCode);
+  
+  // Initialize everything
+  buildReplacementRows();
+  loadSavedFilesUI();
+  updateFileListUI();
+  loadSavedCode();
+</script>
+</body>
+</html>
